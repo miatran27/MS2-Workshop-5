@@ -1,9 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New York City in Mia's view</title>
+  <title>Interactive NYC Map</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div id="map-stage">
+    <img id="map-img" src="./images/nycmap.jpeg" alt="NYC Map">
+
+    <div id="start-overlay">
+      <span>Click to Start Sound</span>
+    </div>
+
+    <!-- Zone order: center (back), left, right, bottom (front) so bottom wins in corners -->
+    <div id="zone-center" class="zone" data-ambient="city"></div>
+    <div id="zone-left" class="zone" data-ambient="river"></div>
+    <div id="zone-right" class="zone" data-ambient="river"></div>
+    <div id="zone-bottom" class="zone" data-ambient="river"></div>
+
+    <div id="pin1" class="pin" data-pin="pin1" style="left: 30%; top: 55%;"></div>
+    <div id="pin2" class="pin" data-pin="pin2" style="left: 45%; top: 60%;"></div>
+    <div id="pin3" class="pin" data-pin="pin3" style="left: 60%; top: 35%;"></div>
+    <div id="pin4" class="pin" data-pin="pin4" style="left: 55%; top: 20%;"></div>
+
+    <div id="debug-layer" class="debug-off" aria-hidden="true">
+      <span class="debug-zone" data-for="zone-left">LEFT</span>
+      <span class="debug-zone" data-for="zone-right">RIGHT</span>
+      <span class="debug-zone" data-for="zone-bottom">BOTTOM</span>
+      <span class="debug-zone" data-for="zone-center">CENTER</span>
+      <span class="debug-pin" data-for="pin1">1</span>
+      <span class="debug-pin" data-for="pin2">2</span>
+      <span class="debug-pin" data-for="pin3">3</span>
+      <span class="debug-pin" data-for="pin4">4</span>
+    </div>
+  </div>
+
+  <audio id="ambient-river" loop preload="auto">
+    <source src="./audio/riverandships.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="ambient-city" loop preload="auto">
+    <source src="./audio/busycity2.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="bagelshop-audio" preload="auto" src="./audio/bagelshop.mp3"></audio>
+  <audio id="audio-pin1" preload="auto">
+    <source src="./audio/hotspot1.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="audio-pin2" preload="auto">
+    <source src="./audio/hotspot2.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="audio-pin3" preload="auto">
+    <source src="./audio/hotspot3.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="audio-pin4" preload="auto">
+    <source src="./audio/hotspot4.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
 </body>
 </html>

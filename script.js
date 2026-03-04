@@ -14,11 +14,14 @@
   var ambientRiver = document.getElementById('ambient-river');
   var ambientCity = document.getElementById('ambient-city');
   var bagelshopAudio = document.getElementById('bagelshop-audio');
+  var coffeeshopAudio = document.getElementById('coffeeshop-audio');
+  var pierAudio = document.getElementById('pier-audio');
+  var parkAudio = document.getElementById('park-audio');
   var pinAudios = {
     pin1: bagelshopAudio,
-    pin2: document.getElementById('audio-pin2'),
-    pin3: document.getElementById('audio-pin3'),
-    pin4: document.getElementById('audio-pin4')
+    pin2: coffeeshopAudio,
+    pin3: pierAudio,
+    pin4: parkAudio
   };
 
   function fadeTo(audioEl, targetVol, ms, easing) {
@@ -111,29 +114,6 @@
     });
   });
 
-  ['pin2', 'pin3', 'pin4'].forEach(function (pinId) {
-    var el = document.getElementById(pinId);
-    var audio = pinAudios[pinId];
-    if (!el || !audio) return;
-    el.addEventListener('mouseenter', function () {
-      if (!audioUnlocked) return;
-      stopAllHotspots(pinId);
-      activePinId = pinId;
-      audio.currentTime = 0;
-      audio.play().catch(function () {});
-      setDucking(true);
-    });
-    el.addEventListener('mouseleave', function () {
-      if (!audioUnlocked) return;
-      audio.pause();
-      audio.currentTime = 0;
-      if (activePinId === pinId) {
-        activePinId = null;
-        setDucking(false);
-      }
-    });
-  });
-
   (function () {
     var el = document.getElementById('pin1');
     var audio = bagelshopAudio;
@@ -141,13 +121,28 @@
     el.addEventListener('mouseenter', function () {
       if (!audioUnlocked) return;
       if (activePinId === 'pin1') return;
-      stopAllHotspots('pin1');
+
+      // Stop all hotspot audio and ambient audio (exclusive: only this pin plays)
+      stopAllHotspots();
+      fadeTo(ambientRiver, 0, 200);
+      fadeTo(ambientCity, 0, 200);
+      setTimeout(function () {
+        if (ambientRiver) {
+          ambientRiver.pause();
+          ambientRiver.currentTime = 0;
+        }
+        if (ambientCity) {
+          ambientCity.pause();
+          ambientCity.currentTime = 0;
+        }
+      }, 200);
+      ambientMode = null;
+
       activePinId = 'pin1';
       audio.volume = 0;
       audio.currentTime = 0;
       audio.play().catch(function () {});
       fadeTo(audio, 1, 400, 'ease-in');
-      setDucking(true);
     });
     el.addEventListener('mouseleave', function () {
       if (!audioUnlocked) return;
@@ -157,7 +152,143 @@
         audio.currentTime = 0;
         if (activePinId === 'pin1') {
           activePinId = null;
-          setDucking(false);
+          // Ambient will resume the next time a zone mouseenter fires
+        }
+      }, 300);
+    });
+  })();
+
+  (function () {
+    var el = document.getElementById('pin4');
+    var audio = parkAudio;
+    if (!el || !audio) return;
+
+    el.addEventListener('mouseenter', function () {
+      if (!audioUnlocked) return;
+      if (activePinId === 'pin4') return;
+
+      // Stop all hotspot audio and ambient audio
+      stopAllHotspots();
+      fadeTo(ambientRiver, 0, 200);
+      fadeTo(ambientCity, 0, 200);
+      setTimeout(function () {
+        if (ambientRiver) {
+          ambientRiver.pause();
+          ambientRiver.currentTime = 0;
+        }
+        if (ambientCity) {
+          ambientCity.pause();
+          ambientCity.currentTime = 0;
+        }
+      }, 200);
+      ambientMode = null;
+
+      activePinId = 'pin4';
+      audio.volume = 0;
+      audio.currentTime = 0;
+      audio.play().catch(function () {});
+      fadeTo(audio, 1, 400, 'ease-in');
+    });
+
+    el.addEventListener('mouseleave', function () {
+      if (!audioUnlocked) return;
+      fadeTo(audio, 0, 300);
+      setTimeout(function () {
+        audio.pause();
+        audio.currentTime = 0;
+        if (activePinId === 'pin4') {
+          activePinId = null;
+          // Ambient will resume the next time a zone mouseenter fires
+        }
+      }, 300);
+    });
+  })();
+
+  (function () {
+    var el = document.getElementById('pin2');
+    var audio = coffeeshopAudio;
+    if (!el || !audio) return;
+    el.addEventListener('mouseenter', function () {
+      if (!audioUnlocked) return;
+      if (activePinId === 'pin2') return;
+
+      // Stop all hotspot audio and ambient audio (exclusive: only this pin plays)
+      stopAllHotspots();
+      fadeTo(ambientRiver, 0, 200);
+      fadeTo(ambientCity, 0, 200);
+      setTimeout(function () {
+        if (ambientRiver) {
+          ambientRiver.pause();
+          ambientRiver.currentTime = 0;
+        }
+        if (ambientCity) {
+          ambientCity.pause();
+          ambientCity.currentTime = 0;
+        }
+      }, 200);
+      ambientMode = null;
+
+      activePinId = 'pin2';
+      audio.volume = 0;
+      audio.currentTime = 0;
+      audio.play().catch(function () {});
+      fadeTo(audio, 1, 400, 'ease-in');
+    });
+    el.addEventListener('mouseleave', function () {
+      if (!audioUnlocked) return;
+      fadeTo(audio, 0, 300);
+      setTimeout(function () {
+        audio.pause();
+        audio.currentTime = 0;
+        if (activePinId === 'pin2') {
+          activePinId = null;
+          // Ambient will resume the next time a zone mouseenter fires
+        }
+      }, 300);
+    });
+  })();
+
+  (function () {
+    var el = document.getElementById('pin3');
+    var audio = pierAudio;
+    if (!el || !audio) return;
+
+    el.addEventListener('mouseenter', function () {
+      if (!audioUnlocked) return;
+      if (activePinId === 'pin3') return;
+
+      // Stop all hotspot audio and ambient audio
+      stopAllHotspots();
+      fadeTo(ambientRiver, 0, 200);
+      fadeTo(ambientCity, 0, 200);
+      setTimeout(function () {
+        if (ambientRiver) {
+          ambientRiver.pause();
+          ambientRiver.currentTime = 0;
+        }
+        if (ambientCity) {
+          ambientCity.pause();
+          ambientCity.currentTime = 0;
+        }
+      }, 200);
+      ambientMode = null;
+
+      activePinId = 'pin3';
+      audio.volume = 0;
+      audio.currentTime = 0;
+      audio.play().catch(function () {});
+      fadeTo(audio, 1, 400, 'ease-in');
+    });
+
+    el.addEventListener('mouseleave', function () {
+      if (!audioUnlocked) return;
+      fadeTo(audio, 0, 300);
+      setTimeout(function () {
+        audio.pause();
+        audio.currentTime = 0;
+        if (activePinId === 'pin3') {
+          activePinId = null;
+          // Ambient will resume the next time a zone mouseenter fires
         }
       }, 300);
     });

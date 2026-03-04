@@ -122,20 +122,10 @@
       if (!audioUnlocked) return;
       if (activePinId === 'pin1') return;
 
-      // Stop all hotspot audio and ambient audio (exclusive: only this pin plays)
+      // Stop all other audio so only this hotspot plays
       stopAllHotspots();
-      fadeTo(ambientRiver, 0, 200);
-      fadeTo(ambientCity, 0, 200);
-      setTimeout(function () {
-        if (ambientRiver) {
-          ambientRiver.pause();
-          ambientRiver.currentTime = 0;
-        }
-        if (ambientCity) {
-          ambientCity.pause();
-          ambientCity.currentTime = 0;
-        }
-      }, 200);
+      if (ambientRiver) { ambientRiver.pause(); ambientRiver.currentTime = 0; }
+      if (ambientCity) { ambientCity.pause(); ambientCity.currentTime = 0; }
       ambientMode = null;
 
       activePinId = 'pin1';
@@ -150,10 +140,7 @@
       setTimeout(function () {
         audio.pause();
         audio.currentTime = 0;
-        if (activePinId === 'pin1') {
-          activePinId = null;
-          // Ambient will resume the next time a zone mouseenter fires
-        }
+        if (activePinId === 'pin1') activePinId = null;
       }, 300);
     });
   })();
@@ -162,24 +149,16 @@
     var el = document.getElementById('pin4');
     var audio = parkAudio;
     if (!el || !audio) return;
-
     el.addEventListener('mouseenter', function () {
       if (!audioUnlocked) return;
       if (activePinId === 'pin4') return;
 
-      // Stop all hotspot audio and ambient audio
       stopAllHotspots();
       fadeTo(ambientRiver, 0, 200);
       fadeTo(ambientCity, 0, 200);
       setTimeout(function () {
-        if (ambientRiver) {
-          ambientRiver.pause();
-          ambientRiver.currentTime = 0;
-        }
-        if (ambientCity) {
-          ambientCity.pause();
-          ambientCity.currentTime = 0;
-        }
+        if (ambientRiver) { ambientRiver.pause(); ambientRiver.currentTime = 0; }
+        if (ambientCity) { ambientCity.pause(); ambientCity.currentTime = 0; }
       }, 200);
       ambientMode = null;
 
@@ -189,17 +168,13 @@
       audio.play().catch(function () {});
       fadeTo(audio, 1, 400, 'ease-in');
     });
-
     el.addEventListener('mouseleave', function () {
       if (!audioUnlocked) return;
       fadeTo(audio, 0, 300);
       setTimeout(function () {
         audio.pause();
         audio.currentTime = 0;
-        if (activePinId === 'pin4') {
-          activePinId = null;
-          // Ambient will resume the next time a zone mouseenter fires
-        }
+        if (activePinId === 'pin4') activePinId = null;
       }, 300);
     });
   })();
@@ -212,20 +187,10 @@
       if (!audioUnlocked) return;
       if (activePinId === 'pin2') return;
 
-      // Stop all hotspot audio and ambient audio (exclusive: only this pin plays)
+      // Stop all other audio so only this hotspot plays
       stopAllHotspots();
-      fadeTo(ambientRiver, 0, 200);
-      fadeTo(ambientCity, 0, 200);
-      setTimeout(function () {
-        if (ambientRiver) {
-          ambientRiver.pause();
-          ambientRiver.currentTime = 0;
-        }
-        if (ambientCity) {
-          ambientCity.pause();
-          ambientCity.currentTime = 0;
-        }
-      }, 200);
+      if (ambientRiver) { ambientRiver.pause(); ambientRiver.currentTime = 0; }
+      if (ambientCity) { ambientCity.pause(); ambientCity.currentTime = 0; }
       ambientMode = null;
 
       activePinId = 'pin2';
@@ -240,10 +205,7 @@
       setTimeout(function () {
         audio.pause();
         audio.currentTime = 0;
-        if (activePinId === 'pin2') {
-          activePinId = null;
-          // Ambient will resume the next time a zone mouseenter fires
-        }
+        if (activePinId === 'pin2') activePinId = null;
       }, 300);
     });
   })();
@@ -252,24 +214,16 @@
     var el = document.getElementById('pin3');
     var audio = pierAudio;
     if (!el || !audio) return;
-
     el.addEventListener('mouseenter', function () {
       if (!audioUnlocked) return;
       if (activePinId === 'pin3') return;
 
-      // Stop all hotspot audio and ambient audio
       stopAllHotspots();
       fadeTo(ambientRiver, 0, 200);
       fadeTo(ambientCity, 0, 200);
       setTimeout(function () {
-        if (ambientRiver) {
-          ambientRiver.pause();
-          ambientRiver.currentTime = 0;
-        }
-        if (ambientCity) {
-          ambientCity.pause();
-          ambientCity.currentTime = 0;
-        }
+        if (ambientRiver) { ambientRiver.pause(); ambientRiver.currentTime = 0; }
+        if (ambientCity) { ambientCity.pause(); ambientCity.currentTime = 0; }
       }, 200);
       ambientMode = null;
 
@@ -279,17 +233,13 @@
       audio.play().catch(function () {});
       fadeTo(audio, 1, 400, 'ease-in');
     });
-
     el.addEventListener('mouseleave', function () {
       if (!audioUnlocked) return;
       fadeTo(audio, 0, 300);
       setTimeout(function () {
         audio.pause();
         audio.currentTime = 0;
-        if (activePinId === 'pin3') {
-          activePinId = null;
-          // Ambient will resume the next time a zone mouseenter fires
-        }
+        if (activePinId === 'pin3') activePinId = null;
       }, 300);
     });
   })();

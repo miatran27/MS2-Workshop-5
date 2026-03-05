@@ -10,6 +10,24 @@ html, body {
   overflow: hidden;
 }
 
+body {
+  cursor: none;
+}
+
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+#custom-cursor img {
+  width: 40px;
+  height: auto;
+}
+
 #map-stage {
   position: relative;
   width: 100vw;

@@ -258,4 +258,12 @@
       }
     }
   });
+
+  var cursorEl = document.getElementById('custom-cursor');
+  if (cursorEl) {
+    document.addEventListener('mousemove', function (e) {
+      cursorEl.style.left = e.clientX + 'px';
+      cursorEl.style.top = e.clientY + 'px';
+    });
+  }
 })();
